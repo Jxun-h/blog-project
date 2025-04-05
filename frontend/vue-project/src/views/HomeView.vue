@@ -1,31 +1,31 @@
 <template>
-  <div class="home">
-    <section class="hero">
+  <div class="page-container">
+    <section class="hero section-card">
       <div class="hero-content">
         <h1 class="welcome-title">Welcome to Jxun-h Blog! 👨‍💻</h1>
         <p class="hero-description">개발과 관련된 다양한 주제를 공유하는 블로그입니다.</p>
       </div>
     </section>
 
-    <section class="featured-topics">
+    <section class="featured-topics section-card">
       <h2 class="section-title">주요 주제</h2>
-      <div class="topics-grid">
-        <div class="topic-card">
+      <div class="grid-container col-4">
+        <div class="topic-card item-card">
           <div class="topic-icon">📊</div>
           <h3>알고리즘</h3>
           <p>알고리즘 문제 풀이와 해설을 공유합니다.</p>
         </div>
-        <div class="topic-card">
+        <div class="topic-card item-card">
           <div class="topic-icon">⚙️</div>
           <h3>백엔드 개발</h3>
           <p>Spring Boot, MySQL 등 백엔드 기술을 다룹니다.</p>
         </div>
-        <div class="topic-card">
+        <div class="topic-card item-card">
           <div class="topic-icon">🔍</div>
           <h3>문제 해결</h3>
           <p>개발 중 마주친 문제와 해결 방법을 공유합니다.</p>
         </div>
-        <div class="topic-card">
+        <div class="topic-card item-card">
           <div class="topic-icon">📚</div>
           <h3>기술 학습</h3>
           <p>새로운 기술 스택 학습 내용을 정리합니다.</p>
@@ -33,10 +33,10 @@
       </div>
     </section>
 
-    <section class="recent-posts">
+    <section class="recent-posts section-card">
       <h2 class="section-title">최근 포스트</h2>
-      <div v-if="posts.length > 0" class="post-list">
-        <div v-for="post in posts" :key="post.id" class="post-card">
+      <div v-if="posts.length > 0" class="grid-container col-3">
+        <div v-for="post in posts" :key="post.id" class="post-card item-card">
           <router-link :to="'/post/' + post.id" class="post-link">
             <div class="post-header">
               <h3 class="post-title">{{ post.title }}</h3>
@@ -117,7 +117,7 @@ const formatDate = (dateString: string) => {
 </script>
 
 <style scoped>
-.home {
+.page-container {
   max-width: 1584px;
   margin: 0 auto;
   padding: 0 1rem;
@@ -128,16 +128,14 @@ const formatDate = (dateString: string) => {
   margin-bottom: 2rem;
   font-size: 1.5rem;
   font-weight: 600;
-  color: #333;
+  color: var(--text-color);
 }
 
 .hero {
-  background: #0096ff;
+  background: var(--primary-color);
   color: white;
   padding: 3rem 2rem;
-  border-radius: 8px;
-  margin-bottom: 3rem;
-  text-align: center;
+  margin-top: 2rem;
 }
 
 .hero-content {
@@ -167,10 +165,10 @@ const formatDate = (dateString: string) => {
 }
 
 .topic-card {
-  background: white;
+  background: var(--card-background);
   padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-shadow);
   text-align: center;
   transition: transform 0.2s ease;
 }
@@ -186,12 +184,12 @@ const formatDate = (dateString: string) => {
 
 .topic-card h3 {
   margin-bottom: 0.75rem;
-  color: #333;
+  color: var(--text-color);
   font-size: 1.2rem;
 }
 
 .topic-card p {
-  color: #666;
+  color: var(--secondary-color);
   line-height: 1.5;
   font-size: 0.95rem;
 }
@@ -207,9 +205,9 @@ const formatDate = (dateString: string) => {
 }
 
 .post-card {
-  background: white;
+  background: var(--card-background);
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-shadow);
   transition: transform 0.2s ease;
   height: 100%;
 }
@@ -238,7 +236,7 @@ const formatDate = (dateString: string) => {
 
 .post-title {
   font-size: 1.25rem;
-  color: #333;
+  color: var(--text-color);
   margin: 0;
   margin-bottom: 0.5rem;
   flex: 1;
@@ -246,12 +244,12 @@ const formatDate = (dateString: string) => {
 }
 
 .post-date {
-  color: #666;
+  color: var(--secondary-color);
   font-size: 0.85rem;
 }
 
 .post-excerpt {
-  color: #444;
+  color: var(--secondary-color);
   line-height: 1.5;
   margin-bottom: 1rem;
   font-size: 0.95rem;
@@ -266,19 +264,19 @@ const formatDate = (dateString: string) => {
 }
 
 .tag {
-  background-color: #f0f0f0;
+  background-color: var(--search-background);
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
   font-size: 0.75rem;
-  color: #666;
+  color: var(--secondary-color);
 }
 
 .no-posts {
-  background: white;
+  background: var(--card-background);
   padding: 2rem;
   border-radius: 8px;
   text-align: center;
-  color: #666;
+  color: var(--secondary-color);
   grid-column: 1 / -1;
 }
 
