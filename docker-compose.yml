@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: blog-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: blog_db
+      MYSQL_USER: blog_user
+      MYSQL_PASSWORD: blog_password
+    ports:
+      - "23306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - blog-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: blog-backend
+    ports:
+      - "28081:8080"
+    depends_on:
+      - mysql
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/blog_db
+      - SPRING_DATASOURCE_USERNAME=blog_user
+      - SPRING_DATASOURCE_PASSWORD=blog_password
+    networks:
+      - blog-network
+
+  frontend:
+    build:
+      context: ./frontend/vue-project
+      dockerfile: Dockerfile
+    container_name: blog-frontend
+    ports:
+      - "28080:80"
+    depends_on:
+      - backend
+    networks:
+      - blog-network
+
+volumes:
+  mysql_data:
+
+networks:
+  blog-network:
+    driver: bridge 
